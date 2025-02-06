@@ -37,4 +37,7 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+
+	// OpenJDK 64-Bit Server VM warning 해결
+	jvmArgs '-Xshare:off'
 }
