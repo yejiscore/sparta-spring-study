@@ -35,7 +35,7 @@ public class ProductController {
             @RequestParam("isAsc") boolean isAsc,
 
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return productService.getProducts(userDetails.getUser(), page-1, size, sortBy, isAsc);
+        return productService.getProducts(userDetails.getUser(), page - 1, size, sortBy, isAsc);
     }
 
     @PostMapping("/products/{productId}/folder")
@@ -45,5 +45,25 @@ public class ProductController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         productService.addFolder(productId, folderId, userDetails.getUser());
+    }
+
+    @GetMapping("/folders/{folderId}/products")
+    public Page<ProductResponseDto> getProductsInfolder(
+            @PathVariable Long folderId,
+
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy,
+            @RequestParam("isAsc") boolean isAsc,
+
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return productService.getProductsInfolder(
+                folderId,
+                page - 1,
+                size,
+                sortBy,
+                isAsc,
+                userDetails.getUser()
+        );
     }
 }
